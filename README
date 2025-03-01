@@ -1,0 +1,90 @@
+Product Catalog Application
+A full-stack application built with Next.js, Nest.js, and PostgreSQL that allows you to manage a product catalog.
+Features
+
+View all products
+Add new products with validation
+Delete products
+JWT Authentication
+
+Tech Stack
+
+Frontend: Next.js, React, TailwindCSS, React Hook Form
+Backend: Nest.js, TypeORM
+Database: PostgreSQL (Docker)
+
+Prerequisites
+
+Node.js (v16+)
+Docker and Docker Compose
+npm or yarn
+
+Getting Started
+
+1. Clone the repository
+   git clone <repository-url>
+   cd product-catalog
+2. Set up the backend
+   cd backend
+
+# Install dependencies
+
+npm install
+
+# Start PostgreSQL with Docker
+
+docker-compose up -d
+
+# Start the development server
+
+npm run start:dev
+The backend will be running at http://localhost:8000.
+
+3. Set up the frontend
+   ycd frontend
+
+# Install dependencies
+
+npm install
+
+# Start the development server
+
+npm run dev
+The frontend will be running at http://localhost:3000.
+API Endpoints
+Products
+
+GET /products - Get all products
+POST /products - Create a new product
+DELETE /products/:id - Delete a product by ID
+
+Authentication
+
+POST /auth/register - Register a new user
+POST /auth/login - Login with credentials
+
+Project Structure
+Backend (Nest.js)
+
+src/products/ - Product module with controllers, services, and entities
+src/auth/ - Authentication module
+
+Frontend (Next.js)
+
+src/app/ - Application pages
+src/components/ - Reusable React components
+src/services/ - API service functions
+
+Database Schema
+Product Entity
+
+id (UUID, primary key)
+name (string, required)
+price (float, required)
+description (string, optional)
+
+User Entity
+
+id (UUID, primary key)
+username (string, unique, required)
+password (string, required)
