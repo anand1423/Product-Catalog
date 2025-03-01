@@ -41,7 +41,7 @@ npm run start:dev
 The backend will be running at http://localhost:8000.
 
 3. Set up the frontend
-   ycd frontend
+   cd frontend
 
 # Install dependencies
 

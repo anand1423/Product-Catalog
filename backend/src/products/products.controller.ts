@@ -8,6 +8,7 @@ import {
   HttpCode,
   UseGuards,
   Query,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -21,13 +22,12 @@ export class ProductsController {
   @Get()
   findAll(
     @Query('search') search?: string,
-    @Query('minPrice') minPrice?: number,
-    @Query('maxPrice') maxPrice?: number,
+    @Query('minPrice') minPrice?: string,
+    @Query('maxPrice') maxPrice?: string,
   ): Promise<Product[]> {
-    if (search || minPrice || maxPrice) {
-      return this.productsService.search(search, minPrice, maxPrice);
-    }
-    return this.productsService.findAll();
+    const minPriceNum = minPrice ? parseFloat(minPrice) : undefined;
+    const maxPriceNum = maxPrice ? parseFloat(maxPrice) : undefined;
+    return this.productsService.search(search, minPriceNum, maxPriceNum);
   }
 
   @Post()
@@ -39,7 +39,7 @@ export class ProductsController {
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
   @HttpCode(204)
-  remove(@Param('id') id: string): Promise<void> {
+  remove(@Param('id', new ParseUUIDPipe()) id: string): Promise<void> {
     return this.productsService.remove(id);
   }
 }

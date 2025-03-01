@@ -8,7 +8,7 @@ import { CreateProductDto } from './dto/create-product.dto';
 export class ProductsService {
   constructor(
     @InjectRepository(Product)
-    private productRepository: Repository<Product>,
+    private readonly productRepository: Repository<Product>,
   ) {}
 
   async findAll(): Promise<Product[]> {
@@ -23,19 +23,17 @@ export class ProductsService {
     const query = this.productRepository.createQueryBuilder('product');
 
     if (search) {
-      query.where(
+      query.andWhere(
         'LOWER(product.name) LIKE LOWER(:search) OR LOWER(product.description) LIKE LOWER(:search)',
-        {
-          search: `%${search}%`,
-        },
+        { search: `%${search}%` },
       );
     }
 
-    if (minPrice) {
+    if (minPrice !== undefined) {
       query.andWhere('product.price >= :minPrice', { minPrice });
     }
 
-    if (maxPrice) {
+    if (maxPrice !== undefined) {
       query.andWhere('product.price <= :maxPrice', { maxPrice });
     }
 

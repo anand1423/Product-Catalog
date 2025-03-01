@@ -18,12 +18,13 @@ import { JwtStrategy } from './strategies/jwt.strategy';
       useFactory: (configService: ConfigService) => ({
         secret: configService.get<string>('JWT_SECRET'),
         signOptions: {
-          expiresIn: configService.get<string>('JWT_EXPIRATION', '3600s'),
+          expiresIn: configService.get<string>('JWT_EXPIRATION', '1h'),
         },
       }),
     }),
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],
+  exports: [AuthService],
 })
 export class AuthModule {}

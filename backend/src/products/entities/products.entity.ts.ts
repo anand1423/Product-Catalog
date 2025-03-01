@@ -1,16 +1,16 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity({ name: 'products' }) // table name for clarity
 export class Product {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ nullable: false })
+  @Column({ type: 'varchar', length: 255, nullable: false })
   name: string;
 
-  @Column({ type: 'float', nullable: false })
+  @Column({ type: 'decimal', precision: 10, scale: 2, nullable: false })
   price: number;
 
-  @Column({ nullable: true })
-  description: string;
+  @Column({ type: 'text', nullable: true })
+  description?: string;
 }

@@ -3,20 +3,20 @@ import {
   IsNumber,
   IsOptional,
   IsString,
-  Min,
+  IsPositive,
 } from 'class-validator';
 
 export class CreateProductDto {
-  @IsNotEmpty()
-  @IsString()
+  @IsNotEmpty({ message: 'Product name is required' })
+  @IsString({ message: 'Product name must be a string' })
   name: string;
 
-  @IsNotEmpty()
-  @IsNumber()
-  @Min(0.01)
+  @IsNotEmpty({ message: 'Price is required' })
+  @IsNumber({}, { message: 'Price must be a number' })
+  @IsPositive({ message: 'Price must be greater than 0' })
   price: number;
 
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Description must be a string' })
   description?: string;
 }

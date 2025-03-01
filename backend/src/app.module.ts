@@ -8,7 +8,7 @@ import { User } from './auth/entities/user.entity';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({ isGlobal: true }), // Load .env globally
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -20,7 +20,7 @@ import { User } from './auth/entities/user.entity';
         password: configService.get('DB_PASSWORD', 'postgres'),
         database: configService.get('DB_DATABASE', 'product_catalog'),
         entities: [Product, User],
-        synchronize: configService.get<boolean>('DB_SYNC', true),
+        synchronize: configService.get<boolean>('DB_SYNC', false),
       }),
     }),
     ProductsModule,
