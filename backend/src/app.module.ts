@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ProductsModule } from './products/products.module';
 import { AuthModule } from './auth/auth.module';
-import { Product } from './products/entities/products.entity.ts';
+import { Product } from './products/entities/products.entity';
 import { User } from './auth/entities/user.entity';
 
 @Module({
